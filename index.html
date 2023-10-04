@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+    <script src="script.js"></script>
+    <title>hello there</title>
+</head>
+<body>
+    
+    <div class="search-bar">
+        <input type="text" id="textInput" placeholder="What are u looking for...?" onkeydown="checkEnter(event)">
+        <script>
+            function checkEnter(event) {
+                if (event.key === "Enter") {
+                    var inputValue = document.getElementById("textInput").value;
+                    location.href =  "https://duckduckgo.com/?q=" + inputValue;
+                }
+            }
+        </script>
+    </div>
+
+    <div class="allmedia" id="media">
+        <a href="https://discord.com/app" target="_blank"><iconify-icon icon="carbon:logo-discord"></iconify-icon><p>discord</p></a>
+        <a href="https://github.com/Robin-qwerty" target="_blank"><iconify-icon icon="cib:github"></iconify-icon><p>github</p></a>
+        <a href="https://youtube.com/" target="_blank"><iconify-icon icon="uil:youtube"></iconify-icon><p>youtube</p></a>
+        <a href="https://chat.openai.com/" target="_blank"><iconify-icon icon="arcticons:openai-chatgpt"></iconify-icon><p>chat gpt</p></a>
+        <!-- <a href="mailto:robin@humilis.net?subject=portfolio" target="_blank"><iconify-icon icon="bx:mail-send"></iconify-icon><p>email</p></a> -->
+    </div>
+    
+</body>
+</html>
