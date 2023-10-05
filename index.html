@@ -3,32 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New tab</title>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
-    <link href="style.css" rel="stylesheet">
-    <script src="script.js"></script>
-    <title>hello there</title>
-</head>
-<body>
-    
-    <div class="search-bar">
-        <input type="text" id="textInput" placeholder="What are u looking for...?" onkeydown="checkEnter(event)">
-        <script>
-            function checkEnter(event) {
-                if (event.key === "Enter") {
-                    var inputValue = document.getElementById("textInput").value;
-                    location.href =  "https://duckduckgo.com/?q=" + inputValue;
-                }
+    <style>
+        /* color theme I am useing: https://colorkit.co/palette/00202e-003f5c-2c4875-8a508f-bc5090-ff6361-ff8531-ffa600-ffd380/ */
+
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(10,15,20);
+        }
+
+        /* ----- */
+
+        .search-bar {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20%;
+            margin-bottom: 2rem;
+        }
+        .search-bar input {
+            padding: 12px;
+            background-color: #003f5c;
+            border: none;
+            border-radius: 5px;
+            color: #ffa600;
+            font-size: 1.2em;
+            width: 65%;
+            outline: none;
+        }
+        .search-bar input:hover,
+        .search-svg:hover {
+            background-color: #005691;
+        }
+        .search-bar input:focus {
+            box-shadow: 0 0 5px #ffa600;
+        }
+        .search-svg {
+            padding: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            background-color: #003f5c;
+            border-radius: 5px;
+        }
+        #search-svg {
+            margin: 0;
+            padding: 0;
+            width: 55px;
+            height: 44px;
+            stroke: #ffd380;
+            fill-opacity: 0;
+            stroke-dasharray: 4500;
+            animation: draw 50s ease;
+        }
+
+        @keyframes draw {
+            0% {
+                stroke-dashoffset: 4500;
             }
-        </script>
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* ----- */
+
+        .allmedia {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 36px;
+        }
+        .allmedia a {
+            font-size: 50px;
+            color: #ff6361;
+            padding: 1rem;
+            padding-bottom: 1rem;
+            transition: padding .3s cubic-bezier(.455,.03,.515,.955);
+        }
+        .allmedia a:hover,
+        .allmedia a:focus {
+            background: #1a1a1a;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            border-radius: 10%;
+        }
+        .allmedia p {
+            text-decoration: none;
+            font-size: 15px;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body onload="clearInput(), startTypingEffect()">
+
+    <div class="search-bar">
+        <input type="text" id="textInput" placeholder="" onkeydown="checkEnter(event)">
+        <button class="search-svg" onclick="performSearch()">
+            <svg id="search-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z"/>
+            </svg>
+        </button>
     </div>
+
+    <script>
+        var placeholderText = "What are you looking for...?";
+        var placeholderElement = document.getElementById("textInput");
+
+        function startTypingEffect() {
+            var i = 0;
+            var intervalId = setInterval(function () {
+                placeholderElement.placeholder = placeholderText.substring(0, i);
+                i++;
+                if (i > placeholderText.length) {
+                    clearInterval(intervalId);
+                }
+            }, 80);
+        }
+
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                performSearch();
+            }
+        }
+        
+        function performSearch() {
+            var inputValue = document.getElementById("textInput").value;
+            if (inputValue.trim() !== "") { // Check if the input is not empty
+                location.href =  "https://duckduckgo.com/?q=" + inputValue;
+            }
+        }
+        
+        function clearInput() {
+            document.getElementById("textInput").value = ""; // Clear the input field
+        }
+    </script>
 
     <div class="allmedia" id="media">
         <a href="https://discord.com/app" target="_blank"><iconify-icon icon="carbon:logo-discord"></iconify-icon><p>discord</p></a>
         <a href="https://github.com/Robin-qwerty" target="_blank"><iconify-icon icon="cib:github"></iconify-icon><p>github</p></a>
-        <a href="https://youtube.com/" target="_blank"><iconify-icon icon="uil:youtube"></iconify-icon><p>youtube</p></a>
         <a href="https://chat.openai.com/" target="_blank"><iconify-icon icon="arcticons:openai-chatgpt"></iconify-icon><p>chat gpt</p></a>
-        <!-- <a href="mailto:robin@humilis.net?subject=portfolio" target="_blank"><iconify-icon icon="bx:mail-send"></iconify-icon><p>email</p></a> -->
+        <a href="https://youtube.com/" target="_blank"><iconify-icon icon="uil:youtube"></iconify-icon><p>youtube</p></a>
+        <a href="https://mail.google.com/mail/u/0/" target="_blank"><iconify-icon icon="bxl:gmail"></iconify-icon><p>g-mail</p></a>
+        <a href="https://translate.google.com/" target="_blank"><iconify-icon icon="ic:baseline-g-translate"></iconify-icon><p>translate</p></a>
     </div>
-    
+
 </body>
 </html>
