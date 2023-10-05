@@ -15,6 +15,22 @@
             background-color: rgb(10,15,20);
         }
 
+        #r-svg {
+            padding: 0;
+            width: 80%;
+            height: 80%;
+            stroke: #ffd380;
+            fill-opacity: 0;
+            stroke-dasharray: 4500;
+            /* animation: draw 20s ease; */
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            margin-top: -250px;
+            z-index: -1;
+        }
+
         /* ----- */
 
         .search-bar {
@@ -23,7 +39,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-top: 20%;
+            margin-top: 15%;
             margin-bottom: 2rem;
         }
         .search-bar input {
@@ -35,13 +51,15 @@
             font-size: 1.2em;
             width: 65%;
             outline: none;
+            box-shadow: 0 0 5px #1a2633, 0 0 10px #111a22, 0 0 15px #0A0F14;
         }
         .search-bar input:hover,
         .search-svg:hover {
             background-color: #005691;
         }
-        .search-bar input:focus {
-            box-shadow: 0 0 5px #ffa600;
+        .search-bar input:focus,
+        .search-svg:focus {
+            box-shadow: 0 0 10px #ffa600;
         }
         .search-svg {
             padding: 0;
@@ -50,6 +68,7 @@
             cursor: pointer;
             background-color: #003f5c;
             border-radius: 5px;
+            box-shadow: 0 0 5px #1a2633, 0 0 10px #111a22, 0 0 15px #0A0F14;
         }
         #search-svg {
             margin: 0;
@@ -66,8 +85,32 @@
             0% {
                 stroke-dashoffset: 4500;
             }
+            90% {
+                stroke-dashoffset: 2000;
+            }
             100% {
                 stroke-dashoffset: 0;
+            }
+        }
+
+        @media screen and (max-width:2400px){
+            .search-bar {
+                margin-top: 20%;
+            }
+        }
+        @media screen and (max-width:1500px){
+            .search-bar {
+                margin-top: 25%;
+            }
+        }
+        @media screen and (max-width:1200px){
+            .search-bar {
+                margin-top: 30%;
+            }
+        }
+        @media screen and (max-width:600px){
+            .search-bar {
+                margin-top: 40%;
             }
         }
 
@@ -86,9 +129,12 @@
             padding: 1rem;
             padding-bottom: 1rem;
             transition: padding .3s cubic-bezier(.455,.03,.515,.955);
+            background-color: #0A0F14;
         }
         .allmedia a:hover,
         .allmedia a:focus {
+            animation: abackground 50s ease;
+            opacity: 1;
             background: #1a1a1a;
             padding-left: 1.2rem;
             padding-right: 1.2rem;
@@ -102,9 +148,20 @@
             padding-bottom: 5px;
             text-align: center;
         }
+
+        @keyframes abackground {
+            0% {
+                opacity: 100;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body onload="clearInput(), startTypingEffect()">
+
+    <svg id="r-svg" xmlns="http://www.w3.org/2000/svg" width="320" height="512" viewBox="0 0 320 512"><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96v352c0 17.7 14.3 32 32 32s32-14.3 32-32V320h95.3l102.5 146.4c10.1 14.5 30.1 18 44.6 7.9s18-30.1 7.9-44.6l-84.2-120.2C282.8 288.1 320 236.4 320 176c0-79.5-64.5-144-144-144H64zm112 224H64V96h112c44.2 0 80 35.8 80 80s-35.8 80-80 80z"/></svg>
 
     <div class="search-bar">
         <input type="text" id="textInput" placeholder="" onkeydown="checkEnter(event)">
