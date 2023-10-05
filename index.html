@@ -22,7 +22,7 @@
             stroke: #ffd380;
             fill-opacity: 0;
             stroke-dasharray: 4500;
-            /* animation: draw 20s ease; */
+            animation: draw 20s ease;
             position: absolute;
             left: 0;
             right: 0;
@@ -72,6 +72,7 @@
         }
         #search-svg {
             margin: 0;
+            margin-top: 2px;
             padding: 0;
             width: 55px;
             height: 44px;
@@ -79,6 +80,43 @@
             fill-opacity: 0;
             stroke-dasharray: 4500;
             animation: draw 50s ease;
+        }
+
+        .search-svg-tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .search-svg-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 140px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            font-family: 'Arial', sans-serif; 
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: -54px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 0 5px #ffa600;
+        }
+        .search-svg-tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+        .search-svg-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
 
         @keyframes draw {
@@ -121,6 +159,7 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
+            margin: 5%;
             margin-bottom: 36px;
         }
         .allmedia a {
@@ -165,11 +204,16 @@
 
     <div class="search-bar">
         <input type="text" id="textInput" placeholder="" onkeydown="checkEnter(event)">
-        <button class="search-svg" onclick="performSearch()">
-            <svg id="search-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z"/>
-            </svg>
-        </button>
+        <!-- Wrap the search button with a div for the tooltip -->
+        <div class="search-svg-tooltip">
+            <button class="search-svg" onclick="performSearch()">
+                <svg id="search-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z"/>
+                </svg>
+            </button>
+            <!-- Add the tooltip text -->
+            <div class="tooltip-text">Searching with DuckDuckGo</div>
+        </div>
     </div>
 
     <script>
@@ -206,12 +250,12 @@
     </script>
 
     <div class="allmedia" id="media">
-        <a href="https://discord.com/app" target="_blank"><iconify-icon icon="carbon:logo-discord"></iconify-icon><p>discord</p></a>
-        <a href="https://github.com/Robin-qwerty" target="_blank"><iconify-icon icon="cib:github"></iconify-icon><p>github</p></a>
-        <a href="https://chat.openai.com/" target="_blank"><iconify-icon icon="arcticons:openai-chatgpt"></iconify-icon><p>chat gpt</p></a>
-        <a href="https://youtube.com/" target="_blank"><iconify-icon icon="uil:youtube"></iconify-icon><p>youtube</p></a>
-        <a href="https://mail.google.com/mail/u/0/" target="_blank"><iconify-icon icon="bxl:gmail"></iconify-icon><p>g-mail</p></a>
-        <a href="https://translate.google.com/" target="_blank"><iconify-icon icon="ic:baseline-g-translate"></iconify-icon><p>translate</p></a>
+        <a href="https://discord.com/app" target="_blank"><iconify-icon icon="carbon:logo-discord"></iconify-icon><p>Discord</p></a>
+        <a href="https://github.com/Robin-qwerty" target="_blank"><iconify-icon icon="cib:github"></iconify-icon><p>Github</p></a>
+        <a href="https://chat.openai.com/" target="_blank"><iconify-icon icon="arcticons:openai-chatgpt"></iconify-icon><p>Chat-gpt</p></a>
+        <a href="https://youtube.com/" target="_blank"><iconify-icon icon="uil:youtube"></iconify-icon><p>Youtube</p></a>
+        <a href="https://mail.google.com/mail/u/0/" target="_blank"><iconify-icon icon="bxl:gmail"></iconify-icon><p>G-mail</p></a>
+        <a href="https://translate.google.com/" target="_blank"><iconify-icon icon="ic:baseline-g-translate"></iconify-icon><p>Translate</p></a>
     </div>
 
 </body>
